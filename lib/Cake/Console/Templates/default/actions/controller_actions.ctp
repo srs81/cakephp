@@ -40,6 +40,19 @@
 			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
 		}
 		$this->set('<?php echo $singularName; ?>', $this-><?php echo $currentModelName; ?>->read(null, $id));
+		/* If users are in array, then add this ownership check */
+		if (in_array("'users'", $compact)) {
+		echo "/* TR: Authorization */
+                \$currentUser = \$this->UserAuth->getUser();
+                \$currentUserId = \$currentUser['User']['id'];
+                \$ownerId = \$this->request->data['$currentModelName']['user_id'];
+                \$isOwner = (\$currentUserId == \$ownerId);
+                \$isAdmin = (\$currentUser['UserGroup']['id'] == 1);
+                if (!(\$isOwner || \$isAdmin)) {
+                        \$this->Session->setFlash(__('You do not have the permissions to edit this $currentModelName. Please ask the owner.'));
+                        \$this->redirect(array('action' => 'index'));
+                }";
+		}
 	}
 
 <?php $compact = array(); ?>
@@ -88,18 +101,22 @@
  * @param string $id
  * @return void
  */
-	public function <?php echo $admin; ?>edit($id = null) {
+	public function <?php echo $admin; ?>edit($id = null, $type = null) {
 		$this-><?php echo $currentModelName; ?>->id = $id;
 		if (!$this-><?php echo $currentModelName; ?>->exists()) {
 			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($type === 'copy') {
+				unset($this->request->data['<?php echo $currentModelName; ?>']['id']);
+				$this-><?php echo $currentModelName; ?>->create();
+			}
 			if ($this-><?php echo $currentModelName; ?>->save($this->request->data)) {
 <?php if ($wannaUseSession): ?>
 				$this->Session->setFlash(__('The <?php echo strtolower($singularHumanName); ?> has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'view', $id));
 <?php else: ?>
-				$this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'index'));
+				$this->flash(__('The <?php echo strtolower($singularHumanName); ?> has been saved.'), array('action' => 'view', $id));
 <?php endif; ?>
 			} else {
 <?php if ($wannaUseSession): ?>
@@ -123,7 +140,31 @@
 		if (!empty($compact)):
 			echo "\t\t\$this->set(compact(".join(', ', $compact)."));\n";
 		endif;
+		/* If users are in array, then add this ownership check */
+		if (in_array("'users'", $compact)) {
+		echo "/* TR: Authorization */
+                \$currentUser = \$this->UserAuth->getUser();
+                \$currentUserId = \$currentUser['User']['id'];
+                \$ownerId = \$this->request->data['$currentModelName']['user_id'];
+                \$isOwner = (\$currentUserId == \$ownerId);
+                \$isAdmin = (\$currentUser['UserGroup']['id'] == 1);
+                if (!(\$isOwner || \$isAdmin)) {
+                        \$this->Session->setFlash(__('You do not have the permissions to edit this $currentModelName. Please ask the owner.'));
+                        \$this->redirect(array('action' => 'index'));
+                }";
+		}
 	?>
+	}
+
+<?php $compact = array(); ?>
+/**
+ * <?php echo $admin ?>copy method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function <?php echo $admin; ?>copy ($id = null) {
+		$this->edit ($id, 'copy');
 	}
 
 /**

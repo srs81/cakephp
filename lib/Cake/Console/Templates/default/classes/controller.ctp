@@ -74,6 +74,20 @@ if (count($components)):
 	echo ");\n";
 endif;
 
+echo "
+    var \$filters = array  
+        (  
+            'index' => array  
+            (  
+                '$defaultModel' => array  
+                (
+                    '$defaultModel.name',  
+                    '$defaultModel.description'  
+                )  
+            )  
+        );  
+";
+
 echo $actions;
 
 endif; ?>

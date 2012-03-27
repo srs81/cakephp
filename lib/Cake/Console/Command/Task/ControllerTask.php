@@ -252,7 +252,7 @@ class ControllerTask extends BakeTask {
  */
 	protected function _askAboutMethods() {
 		$wannaBakeCrud = $this->in(
-			__d('cake_console', "Would you like to create some basic class methods \n(index(), add(), view(), edit())?"),
+			__d('cake_console', "Would you like to create some basic class methods \n(index(), add(), view(), edit(), copy())?"),
 			array('y','n'), 'n'
 		);
 		$wannaBakeAdminCrud = $this->in(
@@ -452,7 +452,7 @@ class ControllerTask extends BakeTask {
 			)->addArgument('name', array(
 				'help' => __d('cake_console', 'Name of the controller to bake. Can use Plugin.name to bake controllers into plugins.')
 			))->addOption('public', array(
-				'help' => __d('cake_console', 'Bake a controller with basic crud actions (index, view, add, edit, delete).'),
+				'help' => __d('cake_console', 'Bake a controller with basic crud actions (index, view, add, edit, copy, delete).'),
 				'boolean' => true
 			))->addOption('admin', array(
 				'help' => __d('cake_console', 'Bake a controller with crud actions for one of the Routing.prefixes.'),
@@ -495,7 +495,7 @@ class ControllerTask extends BakeTask {
 		$this->out();
 		$this->out("controller <name> public");
 		$this->out("\tbakes controller with basic crud actions");
-		$this->out("\t(index, view, add, edit, delete)");
+		$this->out("\t(index, view, add, edit, copy, delete)");
 		$this->out();
 		$this->out("controller <name> admin");
 		$this->out("\tbakes a controller with basic crud actions for one of the");
@@ -504,8 +504,8 @@ class ControllerTask extends BakeTask {
 		$this->out("controller <name> public admin");
 		$this->out("\tbakes a controller with basic crud actions for one");
 		$this->out("\tConfigure::read('Routing.prefixes') and non admin methods.");
-		$this->out("\t(index, view, add, edit, delete,");
-		$this->out("\tadmin_index, admin_view, admin_edit, admin_add, admin_delete)");
+		$this->out("\t(index, view, add, edit, copy, delete,");
+		$this->out("\tadmin_index, admin_view, admin_edit, admin_copy, admin_add, admin_delete)");
 		$this->out();
 		$this->out("controller all");
 		$this->out("\tbakes all controllers with CRUD methods.");

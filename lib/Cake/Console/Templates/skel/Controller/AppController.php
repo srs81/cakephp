@@ -21,6 +21,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('FullCalendarAppController', 'FullCalendar.Controller');
 
 /**
  * Application Controller
@@ -31,4 +32,12 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  */
 class AppController extends Controller {
+		var $helpers = array('Form', 'Html', 'Session', 'Js', 'Usermgmt.UserAuth', 'Time');
+		public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth', 'Filter.Filter');
+
+		function beforeFilter(){
+			$this->UserAuth->beforeFilter($this);
+			$this->set('authUser', $this->UserAuth->getUser());
+			$this->set('Tr', Configure::read('Tr'));
+		}
 }

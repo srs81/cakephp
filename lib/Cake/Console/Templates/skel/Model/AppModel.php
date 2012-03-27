@@ -21,6 +21,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('FullCalendarAppModel', 'FullCalendar.Model');
 
 /**
  * Application model for Cake.
