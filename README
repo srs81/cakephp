@@ -1,3 +1,11 @@
+WARNING: This is a local, modified version of CakePHP 2.1.1 customized for my own use. You may not be able to build systems using this without a custom script (which I hope to release soon.) 
+
+The biggest changes are in the template files, but also in the bundled plugins that are also part of the template.
+
+The modifications were originally made to CakePHP 2.0.6, and then merged with 2.1.1 to produce this.
+
+============================
+
 CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
 
 The Cake Software Foundation - promoting development related to CakePHP
