@@ -67,4 +67,4 @@ CakePlugin::loadAll(array(
 	'Usermgmt' => array('routes' => true, 'bootstrap' => true),
 ));
 
-require_once ("Config/config.php");
+require_once (ROOT . DS . APP_DIR . DS . "Config/config.php");
