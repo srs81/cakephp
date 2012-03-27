@@ -58,11 +58,7 @@ if (!defined('APP_DIR')) {
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-<<<<<<< HEAD
-//define('CAKE_CORE_INCLUDE_PATH', __CAKE_PATH__);
-=======
 	define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . APP_DIR);
->>>>>>> 206mod
 
 /**
  * Editing below this line should NOT be necessary.
