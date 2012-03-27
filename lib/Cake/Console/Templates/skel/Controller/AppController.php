@@ -21,6 +21,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::uses('FullCalendarAppController', 'FullCalendar.Controller');
 
 /**
  * Application Controller
@@ -32,4 +33,12 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+		var $helpers = array('Form', 'Html', 'Session', 'Js', 'Usermgmt.UserAuth', 'Time');
+		public $components = array('Session','RequestHandler', 'Usermgmt.UserAuth', 'Filter.Filter');
+
+		function beforeFilter(){
+			$this->UserAuth->beforeFilter($this);
+			$this->set('authUser', $this->UserAuth->getUser());
+			$this->set('Tr', Configure::read('Tr'));
+		}
 }

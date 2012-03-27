@@ -63,3 +63,8 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
+CakePlugin::loadAll(array(
+	'Usermgmt' => array('routes' => true, 'bootstrap' => true),
+));
+
+require_once ("Config/config.php");

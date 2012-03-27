@@ -18,6 +18,17 @@
 ?>
 <div class="<?php echo $pluralVar;?> view">
 <h2><?php echo "<?php  echo __('{$singularHumanName}');?>";?></h2>
+<div id="tr_indexview_actions">
+	<div class="actions">
+	<ul>	
+<?php
+	echo "\t\t<li><?php echo \$this->Html->link(\$this->Html->image('tr/Edit.png') . ' ' . __('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false)); ?></li>\n";
+	echo "\t\t<li><?php echo \$this->Html->link(\$this->Html->image('tr/Copy.png') . ' ' . __('Copy " . $singularHumanName ."'), array('action' => 'copy', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false)); ?></li>\n";
+	echo "\t\t<li><?php echo \$this->Form->postLink(\$this->Html->image('tr/Delete.png') . ' ' . __('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false), __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?></li>\n";
+?>
+	</ul>
+	</div>
+</div>
 	<dl>
 <?php
 foreach ($fields as $field) {
@@ -39,34 +50,12 @@ foreach ($fields as $field) {
 }
 ?>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo "<?php echo __('Actions'); ?>"; ?></h3>
-	<ul>
-<?php
-	echo "\t\t<li><?php echo \$this->Html->link(__('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Form->postLink(__('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), null, __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Html->link(__('List " . $pluralHumanName . "'), array('action' => 'index')); ?> </li>\n";
-	echo "\t\t<li><?php echo \$this->Html->link(__('New " . $singularHumanName . "'), array('action' => 'add')); ?> </li>\n";
-
-	$done = array();
-	foreach ($associations as $type => $data) {
-		foreach ($data as $alias => $details) {
-			if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
-				echo "\t\t<li><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "'), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-				echo "\t\t<li><?php echo \$this->Html->link(__('New " .  Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
-				$done[] = $details['controller'];
-			}
-		}
-	}
-?>
-	</ul>
-</div>
 <?php
 if (!empty($associations['hasOne'])) :
 	foreach ($associations['hasOne'] as $alias => $details): ?>
+	<br/><br/>
 	<div class="related">
-		<h3><?php echo "<?php echo __('Related " . Inflector::humanize($details['controller']) . "');?>";?></h3>
+		<h3><?php echo "<?php echo __('Associated " . Inflector::humanize($details['controller']) . "');?>";?></h3>
 	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
 		<dl>
 	<?php
@@ -98,17 +87,19 @@ foreach ($relations as $alias => $details):
 	$otherSingularVar = Inflector::variable($alias);
 	$otherPluralHumanName = Inflector::humanize($details['controller']);
 	?>
+<br/><br/>
 <div class="related">
-	<h3><?php echo "<?php echo __('Related " . $otherPluralHumanName . "');?>";?></h3>
+	<h3><?php echo "<?php echo __('Associated " . $otherPluralHumanName . "');?>";?></h3>
 	<?php echo "<?php if (!empty(\${$singularVar}['{$alias}'])):?>\n";?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 <?php
 			foreach ($details['fields'] as $field) {
+				if (strpos($field, "_id") !== false) 
+					continue;
 				echo "\t\t<th><?php echo __('" . Inflector::humanize($field) . "'); ?></th>\n";
 			}
 ?>
-		<th class="actions"><?php echo "<?php echo __('Actions');?>";?></th>
 	</tr>
 <?php
 echo "\t<?php
@@ -116,14 +107,15 @@ echo "\t<?php
 		foreach (\${$singularVar}['{$alias}'] as \${$otherSingularVar}): ?>\n";
 		echo "\t\t<tr>\n";
 			foreach ($details['fields'] as $field) {
+				if (strpos($field, "_id") !== false) 
+					continue;
+				if (strpos($field, "name") !== false) {
+				echo "\t\t\t<td><?php echo \$this->Html->link(\${$otherSingularVar}['{$field}'], array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}'])); ?></td>\n";
+				} else {
 				echo "\t\t\t<td><?php echo \${$otherSingularVar}['{$field}'];?></td>\n";
+				}
 			}
 
-			echo "\t\t\t<td class=\"actions\">\n";
-			echo "\t\t\t\t<?php echo \$this->Html->link(__('View'), array('controller' => '{$details['controller']}', 'action' => 'view', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-			echo "\t\t\t\t<?php echo \$this->Html->link(__('Edit'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-			echo "\t\t\t\t<?php echo \$this->Form->postLink(__('Delete'), array('controller' => '{$details['controller']}', 'action' => 'delete', \${$otherSingularVar}['{$details['primaryKey']}']), null, __('Are you sure you want to delete # %s?', \${$otherSingularVar}['{$details['primaryKey']}'])); ?>\n";
-			echo "\t\t\t</td>\n";
 		echo "\t\t</tr>\n";
 
 echo "\t<?php endforeach; ?>\n";
@@ -137,3 +129,7 @@ echo "\t<?php endforeach; ?>\n";
 	</div>
 </div>
 <?php endforeach;?>
+</div>
+<div class="actions">
+	<?php echo "<?php echo \$this->element('tr_menu'); ?>"; ?>
+</div>
