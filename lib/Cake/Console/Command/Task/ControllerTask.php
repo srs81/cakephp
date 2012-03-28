@@ -251,7 +251,7 @@ class ControllerTask extends BakeTask {
  */
 	protected function _askAboutMethods() {
 		$wannaBakeCrud = $this->in(
-			__d('cake_console', "Would you like to create some basic class methods \n(index(), add(), view(), edit(), copy())?"),
+			__d('cake_console', "Would you like to create some basic class methods \n(index(), add(), view(), edit())?"),
 			array('y','n'), 'n'
 		);
 		$wannaBakeAdminCrud = $this->in(
@@ -451,7 +451,7 @@ class ControllerTask extends BakeTask {
 			)->addArgument('name', array(
 				'help' => __d('cake_console', 'Name of the controller to bake. Can use Plugin.name to bake controllers into plugins.')
 			))->addOption('public', array(
-				'help' => __d('cake_console', 'Bake a controller with basic crud actions (index, view, add, edit, copy, delete).'),
+				'help' => __d('cake_console', 'Bake a controller with basic crud actions (index, view, add, edit, delete).'),
 				'boolean' => true
 			))->addOption('admin', array(
 				'help' => __d('cake_console', 'Bake a controller with crud actions for one of the Routing.prefixes.'),

@@ -156,17 +156,6 @@
 	?>
 	}
 
-<?php $compact = array(); ?>
-/**
- * <?php echo $admin ?>copy method
- *
- * @param string $id
- * @return void
- */
-	public function <?php echo $admin; ?>copy ($id = null) {
-		$this->edit ($id, 'copy');
-	}
-
 /**
  * <?php echo $admin ?>delete method
  *

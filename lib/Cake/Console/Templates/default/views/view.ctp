@@ -23,7 +23,7 @@
 	<ul>	
 <?php
 	echo "\t\t<li><?php echo \$this->Html->link(\$this->Html->image('tr/Edit.png') . ' ' . __('Edit " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false)); ?></li>\n";
-	echo "\t\t<li><?php echo \$this->Html->link(\$this->Html->image('tr/Copy.png') . ' ' . __('Copy " . $singularHumanName ."'), array('action' => 'copy', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false)); ?></li>\n";
+	echo "\t\t<li><?php echo \$this->Html->link(\$this->Html->image('tr/Copy.png') . ' ' . __('Copy " . $singularHumanName ."'), array('action' => 'edit', \${$singularVar}['{$modelClass}']['{$primaryKey}'], 'copy'), array('escape' => false)); ?></li>\n";
 	echo "\t\t<li><?php echo \$this->Form->postLink(\$this->Html->image('tr/Delete.png') . ' ' . __('Delete " . $singularHumanName . "'), array('action' => 'delete', \${$singularVar}['{$modelClass}']['{$primaryKey}']), array('escape' => false), __('Are you sure you want to delete # %s?', \${$singularVar}['{$modelClass}']['{$primaryKey}'])); ?></li>\n";
 ?>
 	</ul>
