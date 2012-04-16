@@ -35,6 +35,25 @@
 	echo "\t\t<?php echo \$this->Filter->filterForm('" . $singularHumanName . "', array('legend' => 'Search')); ?>\n";  
 	?>
 </div>
+<?php
+echo "
+<?php
+        \$filterString = '';
+        foreach (\$this->viewVars['viewFilterParams'] as \$filter2) {
+                if (!isset(\$filter2['options']['value'])) continue;
+                \$value = \$filter2['options']['value'];
+                \$name = \$filter2['name'];
+                if (!(\$filterString === '')) \$filterString .= ', ';
+                \$filterString .= \"<b>\$value</b> \" . __('in') .
+                        \" <i>\$name</i>\";
+        }
+        if (!(\$filterString === '')) {
+		echo '<div id=\"tr_filterinfo\">';
+                echo __('Filtered by') . ': ' . \$filterString;
+		echo '</div>';
+	}
+?>";
+?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 	<?php  foreach ($fields as $field):?>

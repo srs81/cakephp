@@ -31,7 +31,7 @@
 		echo $this->Html->css('tr.generic');
 		echo $this->Html->css('chosen.css');
 		echo $this->Html->css('/usermgmt/css/umstyle');
-		echo $this->Html->script('/full_calendar/js/jquery-1.5.min');
+		echo $this->Html->script('jquery.min.js');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

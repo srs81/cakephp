@@ -75,17 +75,13 @@ if (count($components)):
 endif;
 
 echo "
-    var \$filters = array  
-        (  
-            'index' => array  
-            (  
-                '$defaultModel' => array  
-                (
+    var \$filters = array (  
+            'index' => array (  
+                '$defaultModel' => array (
                     '$defaultModel.name',  
-                    '$defaultModel.description'  
                 )  
             )  
-        );  
+    );  
 ";
 
 echo $actions;
