@@ -40,6 +40,9 @@
 			throw new NotFoundException(__('Invalid <?php echo strtolower($singularHumanName); ?>'));
 		}
 		$this->set('<?php echo $singularName; ?>', $this-><?php echo $currentModelName; ?>->read(null, $id));
+		if (!empty($compact)):
+			echo "\t\t\$this->set(compact(".join(', ', $compact)."));\n";
+		endif;
 		/* If users are in array, then add this ownership check */
 		if (in_array("'users'", $compact)) {
 		echo "/* TR: Authorization */
