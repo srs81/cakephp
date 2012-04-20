@@ -80,6 +80,10 @@
 <?php endif; ?>
 			}
 		}
+		$trparams = $this->params['named'];
+		foreach ($trparams as $model=>$id) {
+		        $this->request->data['<?php echo $currentModelName; ?>'][$model . '_id'] = $id;
+		}
 <?php
 	foreach (array('belongsTo', 'hasAndBelongsToMany') as $assoc):
 		foreach ($modelObj->{$assoc} as $associationName => $relation):
