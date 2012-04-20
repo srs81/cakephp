@@ -21,7 +21,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo __($Tr['SiteTitle'] . ':'; ?>
+		<?php echo __($Tr['SiteTitle']) . ':'; ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
