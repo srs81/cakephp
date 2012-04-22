@@ -93,6 +93,9 @@ echo "
 				$dateSuccess = true;
 				break;
 			}
+			}
+			if (strpos($field, "email") !== false) {
+				echo "\t\t<td><a href=\"mailto:<?php echo h(\${$singularVar}['{$modelClass}']['{$field}']) ?>\"><?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?></a>&nbsp;</td>\n";
 			} 
 			if ($dateSuccess) continue;
 			if ($isKey !== true) {

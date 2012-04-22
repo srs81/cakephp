@@ -43,9 +43,14 @@ foreach ($fields as $field) {
 			}
 		}
 	}
+
 	if ($isKey !== true) {
 		echo "\t\t<dt><?php echo __('" . Inflector::humanize($field) . "'); ?></dt>\n";
+		if (strpos($field, "email") !== false) {
+		echo "\t\t<dd>\n\t\t\t<a href=\"mailto:<?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?>\"><?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?></a>\n\t\t\t&nbsp;\n\t\t</dd>\n";
+		} else {
 		echo "\t\t<dd>\n\t\t\t<?php echo h(\${$singularVar}['{$modelClass}']['{$field}']); ?>\n\t\t\t&nbsp;\n\t\t</dd>\n";
+		}
 	}
 }
 ?>
