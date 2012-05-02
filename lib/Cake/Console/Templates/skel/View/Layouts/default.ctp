@@ -19,9 +19,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<?php
+		if (isset($Tr['SiteTitle'])) $appname = $Tr['SiteTitle'];
+		else $appname = "Zhen Software";
+	?>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo __($Tr['SiteTitle']) . ':'; ?>
+		<?php echo __($appname) . ':'; ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -41,8 +45,8 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link(__($Tr['SiteTitle']), '/'); ?></h1>
-                        <?php  if ($authUser) { ?>
+			<h1><?php echo $this->Html->link(__($appname), '/'); ?></h1>
+                        <?php  if (isset($authUser)) { ?>
                                 <?php echo $this->element('tr_header'); ?>
                                 <div id="tr_header_auth">Logged in as: <b><?php echo $authUser['User']['name'] ?></b> 
 				| <?php echo $this->Html->link(__("Profile",true), '/viewUser/' . $authUser['User']['id']) ?>
@@ -58,8 +62,8 @@
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			Copyright (c) <?php echo $Tr['StartYear'] ?>-2012 <?php echo $Tr['Copyright'] ?> | 
-			Powered by <a href="#">Zhen CRM</a> | 
+			<?php if (isset($Tr) && is_array($Tr)) { ?>Copyright (c) <?php echo $Tr['StartYear'] ?>-2012 <?php echo $Tr['Copyright'] . " |"; } ?>
+			Powered by <a href="http://zhen.telerim.com/">Zhen/Telerim</a> | 
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt' => __('CakePHP: the rapid development php framework'), 'border' => '0')),
 					'http://www.cakephp.org/',
