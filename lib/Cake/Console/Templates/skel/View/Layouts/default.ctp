@@ -46,7 +46,7 @@
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link(__($appname), '/'); ?></h1>
-                        <?php  if (!isset($authUser)) { ?>
+                        <?php  if (isset($authUser) && $authUser) { ?>
                                 <?php echo $this->element('tr_header'); ?>
                                 <div id="tr_header_auth">Logged in as: <b><?php echo $authUser['User']['name'] ?></b> 
 				| <?php echo $this->Html->link(__("Profile",true), '/viewUser/' . $authUser['User']['id']) ?>
