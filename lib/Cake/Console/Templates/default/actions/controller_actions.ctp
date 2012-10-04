@@ -31,6 +31,7 @@
 /**
  * <?php echo $admin ?>view method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -89,6 +90,7 @@
 /**
  * <?php echo $admin ?>edit method
  *
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */
@@ -150,6 +152,8 @@
 /**
  * <?php echo $admin ?>delete method
  *
+ * @throws MethodNotAllowedException
+ * @throws NotFoundException
  * @param string $id
  * @return void
  */

@@ -56,10 +56,10 @@ echo "
 ?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-	<?php  foreach ($fields as $field):?>
-		<th><?php echo "<?php echo \$this->Paginator->sort('{$field}');?>";?></th>
-	<?php endforeach;?>
-		<th class="actions"><?php echo "<?php echo __('Actions');?>";?></th>
+	<?php  foreach ($fields as $field): ?>
+		<th><?php echo "<?php echo \$this->Paginator->sort('{$field}'); ?>"; ?></th>
+	<?php endforeach; ?>
+		<th class="actions"><?php echo "<?php echo __('Actions'); ?>"; ?></th>
 	</tr>
 	<?php
 	echo "<?php
@@ -120,7 +120,7 @@ echo "
 	echo \$this->Paginator->counter(array(
 	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 	));
-	?>";?>
+	?>"; ?>
 	</p>
 	<?php
 		echo "<?php\n";

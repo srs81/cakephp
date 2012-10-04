@@ -65,15 +65,15 @@ if (!empty($associations['hasOne'])) :
 		<dl>
 	<?php
 			foreach ($details['fields'] as $field) {
-				echo "\t\t<dt><?php echo __('" . Inflector::humanize($field) . "');?></dt>\n";
-				echo "\t\t<dd>\n\t<?php echo \${$singularVar}['{$alias}']['{$field}'];?>\n&nbsp;</dd>\n";
+				echo "\t\t<dt><?php echo __('" . Inflector::humanize($field) . "'); ?></dt>\n";
+				echo "\t\t<dd>\n\t<?php echo \${$singularVar}['{$alias}']['{$field}']; ?>\n&nbsp;</dd>\n";
 			}
 	?>
 		</dl>
-	<?php echo "<?php endif; ?>\n";?>
+	<?php echo "<?php endif; ?>\n"; ?>
 		<div class="actions">
 			<ul>
-				<li><?php echo "<?php echo \$this->Html->link(__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?></li>\n";?>
+				<li><?php echo "<?php echo \$this->Html->link(__('Edit " . Inflector::humanize(Inflector::underscore($alias)) . "'), array('controller' => '{$details['controller']}', 'action' => 'edit', \${$singularVar}['{$alias}']['{$details['primaryKey']}'])); ?></li>\n"; ?>
 			</ul>
 		</div>
 	</div>
@@ -126,7 +126,7 @@ echo "\t<?php
 echo "\t<?php endforeach; ?>\n";
 ?>
 	</table>
-<?php echo "<?php endif; ?>\n\n";?>
+<?php echo "<?php endif; ?>\n\n"; ?>
 	<div class="actions">
 		<ul>
 			<li><?php echo "<?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "'), '/{$details['controller']}/add/{$singularVar}:' . $" . $singularVar . "['{$modelClass}']['id']);?>";?> </li>
